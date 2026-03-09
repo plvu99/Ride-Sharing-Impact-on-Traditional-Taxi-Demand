@@ -1,69 +1,170 @@
-# 🚕 Impact of Uber Rides on Taxi Rides
+# Ride-Sharing-Impact-on-Traditional-Taxi-Demand
 
-## 🧠 Problem Statement
+## 🔎 Overview
 
-As ride-sharing services like Uber expand, it’s important to understand how they impact traditional transportation methods such as Yellow and Green taxis. Specifically, I aim to analyze the **elasticity of taxi demand with respect to Uber rides**—whether Uber acts as a substitute or complement to cab services in New York City.
+Ride-sharing platforms such as Uber have rapidly transformed urban transportation systems. As these platforms expand, an important question arises: _How do ride-sharing services affect traditional taxi demand?_
 
-Understanding this relationship is critical for policymakers, transportation planners, and ride-hailing platforms to assess how rider behavior shifts based on available alternatives.
+This project analyzes over 20 million ride records from Uber, Yellow Cabs, and Green Cabs in New York City during June 2015 to examine **whether Uber rides act as substitutes or complements to traditional taxi services**.
 
-## 🎯 Objective
+Using **exploratory data analysis and regression modeling**, the project evaluates how changes in Uber ride volume relate to taxi ride demand while controlling for weather conditions.
 
-_**1. Does an increase in Uber rides impact the number of taxi rides (Yellow + Green Cabs)?**_
+The analysis provides insights into how different transportation services respond to shared urban demand patterns.
 
-_**2. Can Uber ride volume reliably predict taxi ride volume, even after controlling for external factors?**_
+## 🔐 Business Problem
 
-The project analyzes over **20 million records** drawn from **four distinct datasets**: Green Cab trips, Yellow Cab trips, Uber pickups, and daily precipitation data in June 2015. [Link](https://drive.google.com/drive/folders/1M_XjVQcMo5mZ2diriFbUzLNK6QD4A6dT?usp=sharing)
+Urban transportation operates as a multi-platform ecosystem, where different services compete for the same pool of riders.
 
-**June** typically sees higher ride volumes due to warmer weather and tourism, making it ideal for analyzing demand.
+With the rise of ride-sharing platforms, policymakers and transportation planners must understand:
 
-**NYC** is one of the largest and busiest urban transportation hubs in the U.S., with a high volume of both taxi and ride-share activity. **Manhattan**, the core service zone for both Uber and Yellow Cabs, has the highest ride volume, while Green Cabs restrictions from picking up passengers in much of Manhattan allows for clear comparisons across service types.
+* Whether ride-sharing reduces taxi demand
+* Whether both services respond to common demand drivers
+* How external factors such as weather affect transportation choices
 
-People may opt for rides over walking, biking, or public transport when it rains. Unlike other factors like fare changes or policy shifts, **precipitation** varies daily and can help capture transient changes in demand. It may explain spikes in both Uber and taxi demand, so controlling for it helps isolate the true relationship between Uber and taxi usage.
+If Uber and taxis are strong substitutes, the expansion of ride-sharing could significantly disrupt traditional taxi markets.
 
-## 💡 Proposed Solution
+However, if both services respond to similar demand shocks—such as commuting patterns or weather conditions—they may function more as complements within the urban mobility system.
 
-**1. Data Preprocessing**
+Understanding this relationship is crucial for:
 
-- Filter taxi and Uber trip data for Manhattan in June 2015.
-  
-- Filter daily precipitation data for Manhattan in June 2015.
-  
-- Standardize and aggregate the data by date and location.
+* Transportation policy
+* Urban mobility planning
+* Ride-hailing platform strategy
 
-**2. Descriptive Analysis**
+## 📊 Dataset
 
-- Compare total and average daily trips across Green Cabs, Yellow Cabs, and Uber.
+The project analyzes four datasets covering June 2015 transportation activity in New York City.
 
-- Analyze trip patterns by day of the week.
+| Dataset           | Description                       |
+| ----------------- | --------------------------------- |
+| Yellow Taxi Trips | Trip records from NYC Yellow Cabs |
+| Green Taxi Trips  | Trip records from NYC Green Cabs  |
+| Uber Pickups      | Uber ride pickup data             |
+| Weather Data      | Daily precipitation levels        |
 
-**3. Regression Modeling**
+The datasets were filtered to include pickup locations in Manhattan, the core operating zone for both Uber and Yellow taxis. 
 
-- **Model 1:** Predict total taxi rides using Uber rides only.
+After preprocessing, the dataset included:
 
-- **Model 2:** Add precipitation as a control variable to assess its effect.
+* 11.2M Yellow Cab trips
+* 2.0M Uber trips
+* 0.46M Green Cab trips
 
-## 📊 Key Findings
+with additional temporal features such as:
 
-**1. Total and Average Daily Trips in Manhattan**
+* Date
+* Day of week
+* Hour of day
+* Pickup location
 
-| Service     | Total Trips | Average Daily Trips |
-|-------------|-------------|---------------------|
-| Yellow Cab  | 11.2M       | ~372,000            |
-| Uber        | 2.0M        | ~66,000             |
-| Green Cab   | 0.46M       | ~15,000             |
+Here is the notebook for [data preprocessing](https://github.com/plvu99/Ride-Sharing-Impact-on-Traditional-Taxi-Demand/blob/main/data_preprocessing.ipynb).
 
-**Yellow Cabs** dominate in volume, but **Uber** shows significant market penetration. **Green Cabs** have the lowest presence in Manhattan, as expected given their service zone restrictions.
+## 📍 Methodology
 
-**2. Weekly Patterns**
+The analysis follows three main steps:
 
-**Uber and Yellow Cab rides** peak on **Tuesdays** and fall off on **Sundays**, suggesting strong weekday commuter usage. **Green Cabs** follow a similar but lower-volume trend.
+### 1. Data Preprocessing
 
-**3. Regression Results**
+Trip data from all services were cleaned and standardized.
 
-**Model 1** (without controlling for precipitation) estimates that each additional Uber ride is associated with a 4.07 increase in combined Yellow + Green Cab rides. This is highly significant (t = 67.56, p < 0.001). R² = 0.525, meaning about 52.5% of the variation in taxi rides is explained by Uber rides alone.
+Key steps included:
 
-**Model 2** includes precipitation as a second predictor. The coefficient on Uber rides drops slightly to 3.99, still significant (p < 0.001). Precipitation’s coefficient = 0.126, with p ≈ 0.062, which is marginally insignificant at the 5% level. The R² only increases from 0.525 to 0.526, suggesting that precipitation adds little explanatory power.
+* Filtering pickups occurring in Manhattan
+* Converting timestamps to datetime format
+* Extracting time features (day, week, hour)
+* Aggregating ride counts by date and location
 
-## 📌 Conclusion
+Taxi zone lookup tables were used to identify Manhattan pickup locations. 
 
-Uber ride volume is a **strong predictor** of taxi demand in Manhattan, explaining over **52% of the variation** in daily taxi rides—even when accounting for weather. This supports the hypothesis that ride-sharing and taxis may respond to common demand patterns (e.g., commuting), rather than acting purely as substitutes or competitors.
+### 2. Exploratory Data Analysis
+
+EDA examined:
+
+* Total ride volume by service
+* Average daily rides
+* Trip patterns across days of the week
+
+Results show that Yellow Cabs dominated the market in 2015, while Uber already demonstrated strong growth.
+
+<img width="989" height="590" alt="image" src="https://github.com/user-attachments/assets/912ea16c-b357-443d-987f-c7dcfaa15f73" />
+
+Average daily rides:
+
+| Service    | Avg Daily Trips |
+| ---------- | --------------- |
+| Yellow Cab | ~372,000        |
+| Uber       | ~66,000         |
+| Green Cab  | ~15,000         |
+
+Trip demand peaks on Tuesdays and declines toward Sundays, suggesting strong commuter-driven demand patterns. 
+
+<img width="989" height="590" alt="image" src="https://github.com/user-attachments/assets/92cdfd6c-5235-46f3-9653-556e76f0b8d0" />
+
+### 3. Regression Modeling
+
+Two regression models were used to estimate the relationship between Uber rides and taxi demand.
+
+**Model 1: Baseline Model**
+
+Taxi rides predicted using Uber ride volume only.
+
+Results:
+
+* Uber coefficient ≈ 4.07
+* p < 0.001
+* R² = 0.525
+
+This indicates that Uber ride volume alone explains 52.5% of variation in taxi ride demand. 
+
+**Model 2: Weather-Controlled Model**
+
+The model includes precipitation as a control variable.
+
+Results:
+
+* Uber coefficient ≈ 3.99
+* precipitation coefficient ≈ 0.126
+* R² = 0.526
+
+Precipitation shows only marginal significance and adds minimal explanatory power to the model. 
+
+## 🔑 Key Insights
+
+### 1. Uber and Taxi demand move together
+
+Uber ride volume is a strong predictor of taxi demand, explaining over 50% of demand variation.
+
+This suggests both services respond to shared transportation demand patterns.
+
+### 2. Traditional taxis still dominated the market in 2015
+
+Yellow Cabs recorded over 11 million trips in Manhattan, significantly higher than Uber’s 2 million trips.
+
+However, Uber had already achieved substantial market penetration.
+
+### 3. Ride demand is strongly driven by weekday commuting
+
+Both Uber and taxi rides peak on Tuesdays and weekdays, indicating that commuting and business travel drive ride demand.
+
+### 4. Weather has limited impact on ride demand
+
+While precipitation may increase transportation demand, it contributes very little explanatory power in predicting ride volume.
+
+## ✍️ Business Recommendations
+
+### 1. Transportation planning should consider shared demand drivers
+
+Taxi and ride-sharing demand appear to respond to common urban mobility patterns, suggesting both services are part of the same transportation ecosystem.
+
+### 2. Ride-sharing platforms should anticipate commuter demand
+
+Demand spikes during weekday commuting hours present opportunities to optimize driver allocation, surge pricing strategies, and supply positioning.
+
+### 3. Policymakers should view ride-sharing as complementary mobility
+
+Rather than completely replacing taxis, ride-sharing platforms may expand overall transportation demand, serving riders who previously used other transport modes.
+
+## ⚙ Tools & Technologies
+
+* Python (Pandas, NumPy, Matplotlib, Seaborn)
+* Statsmodels (OLS regression)
+* Parquet datasets
