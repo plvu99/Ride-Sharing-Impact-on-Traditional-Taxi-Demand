@@ -1,4 +1,4 @@
-# Ride-Sharing-Impact-on-Traditional-Taxi-Demand
+# Ride-Sharing Impact on Traditional Taxi Demand
 
 ## 🔎 Overview
 
