@@ -16,9 +16,9 @@ Urban transportation operates as a multi-platform ecosystem, where different ser
 
 With the rise of ride-sharing platforms, policymakers and transportation planners must understand:
 
-* Whether ride-sharing reduces taxi demand
-* Whether both services respond to common demand drivers
-* How external factors such as weather affect transportation choices
+* whether ride-sharing reduces taxi demand
+* whether both services respond to common demand drivers
+* how external factors such as weather affect transportation choices
 
 If Uber and taxis are strong substitutes, the expansion of ride-sharing could significantly disrupt traditional taxi markets.
 
@@ -26,9 +26,9 @@ However, if both services respond to similar demand shocks—such as commuting p
 
 Understanding this relationship is crucial for:
 
-* Transportation policy
-* Urban mobility planning
-* Ride-hailing platform strategy
+* transportation policy
+* urban mobility planning
+* ride-hailing platform strategy
 
 ## 📊 Dataset
 
@@ -51,10 +51,10 @@ After preprocessing, the dataset included:
 
 with additional temporal features such as:
 
-* Date
-* Day of week
-* Hour of day
-* Pickup location
+* date
+* day of week
+* hour of day
+* pickup location
 
 Here is the notebook for [data preprocessing](https://github.com/plvu99/Ride-Sharing-Impact-on-Traditional-Taxi-Demand/blob/main/data_preprocessing.ipynb).
 
@@ -68,10 +68,10 @@ Trip data from all services were cleaned and standardized.
 
 Key steps included:
 
-* Filtering pickups occurring in Manhattan
-* Converting timestamps to datetime format
-* Extracting time features (day, week, hour)
-* Aggregating ride counts by date and location
+* filtering pickups occurring in Manhattan
+* converting timestamps to datetime format
+* extracting time features (day, week, hour)
+* aggregating ride counts by date and location
 
 Taxi zone lookup tables were used to identify Manhattan pickup locations. 
 
@@ -79,9 +79,9 @@ Taxi zone lookup tables were used to identify Manhattan pickup locations.
 
 EDA examined:
 
-* Total ride volume by service
-* Average daily rides
-* Trip patterns across days of the week
+* total ride volume by service
+* average daily rides
+* trip patterns across days of the week
 
 Results show that Yellow Cabs dominated the market in 2015, while Uber already demonstrated strong growth.
 
@@ -165,6 +165,8 @@ Rather than completely replacing taxis, ride-sharing platforms may expand overal
 
 ## ⚙ Tools & Technologies
 
-* Python (Pandas, NumPy, Matplotlib, Seaborn)
+* Python
+* Data preprocessing (Pandas, NumPy)
+* Data visualization (Matplotlib, Seaborn)
 * Statsmodels (OLS regression)
 * Parquet datasets
