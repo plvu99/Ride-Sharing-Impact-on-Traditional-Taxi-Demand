@@ -4,7 +4,7 @@
 
 Ride-sharing platforms such as Uber have rapidly transformed urban transportation systems. As these platforms expand, an important question arises: _How do ride-sharing services affect traditional taxi demand?_
 
-This project analyzes over 20 million ride records from Uber, Yellow Cabs, and Green Cabs in New York City during June 2015 to examine **whether Uber rides act as substitutes or complements to traditional taxi services**.
+This project analyzes over 20 million ride records from Uber, Yellow Cabs, and Green Cabs in New York City during June 2015 to examine whether **Uber rides act as substitutes or complements to traditional taxi services**.
 
 Using **exploratory data analysis and regression modeling**, the project evaluates how changes in Uber ride volume relate to taxi ride demand while controlling for weather conditions.
 
